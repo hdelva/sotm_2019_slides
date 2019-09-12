@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Preprocessing the OpenStreetMap road network</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style type="text/css">
+			.reveal blockquote {
+				position: relative;
+			    padding-left: 1em;
+			 	border-left: 0.2em solid #333333;
+			  	font-weight: 100;
+			  	width: 80%;
+			   	text-align: left;
+			   	font-size: 0.7em;
+			   	box-shadow: none;
+			} 
+			blockquote::before {
+		      content: '\201C';
+		      font-family: 'Sanchez';
+		      color: #333333;
+		   	}
+		   	blockquote::after {
+		      content: '\201D';
+		   	}
+
+			.container{
+			    display: flex;
+			}
+			.col{
+			    flex: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>
+						Client-side route planning: preprocessing the OpenStreetMap road network for Routable Tiles
+					</h3>
+					<p style="font-size: 0.7em">
+						<strong>Harm Delva</strong><sup>1</sup>, Julián Andrés Rojas Meléndez<sup>1</sup>, <strong>Ben Abelshausen</strong><sup>2</sup>, Pieter Colpaert<sup>1</sup> and Ruben Verborgh<sup>1</sup>
+
+					</p>
+					<p style="font-size: 0.7em">
+						 <sup>1</sup> IDLab, Ghent University – imec <br>
+						 <sup>2</sup> Open Knowledge Belgium
+					</p>
+				</section>
+				<section>
+					<h4>
+						Linked Geospatial Data
+					</h4>
+					<blockquote>
+						 We think that the concept of Linked Data is fundamental to the publishing of spatial data on the Web: it is the links that connect data together that are the foundational to the Web of data.
+					</blockquote>
+					<p style="text-align:left; font-size: 0.5em; padding: 0em 5.4em">
+						W3C and OGC, <a href="https://www.w3.org/TR/sdw-bp/"> Spatial Data on the Web Best Practices</a> 
+					</p>
+				</section>
+				<section>
+					<h4>
+						Linked Data Fragments
+					</h4>
+					<figure>
+						<img src="./img/spectrum.jpg" style="border: none; box-shadow: none;"/>
+						<figcaption style="text-align:left; font-size: 0.3em; padding: 0em 2.2em">
+							Verborgh, R., Vander Sande, M., Hartig, O., Van Herwegen, J., De Vocht, L., De Meester, B., ... & Colpaert, P. (2016). Triple Pattern Fragments: a low-cost knowledge graph interface for the Web. Journal of Web Semantics, 37, 184-206.
+						</figcaption>
+					</figure>
+				</section>
+				<section>
+					<h4>
+						Share the load
+					</h4>
+					<figure>
+						<div class="container">
+							<div class="col">
+								<img src="./img/centralized.png" style="border: none; box-shadow: none;"/>
+							</div>
+							<div class="col">
+								<img src="./img/decentralized.png" style="border: none; box-shadow: none;"/>
+							</div>
+						</div>
+						<figcaption style="text-align:left; font-size: 0.3em; padding: 0em 2.2em">
+							Verborgh, R., Vander Sande, M., Colpaert, P., Coppens, S., Mannens, E., & Van de Walle, R. (2014, April). Web-Scale Querying through Linked Data Fragments. In LDOW.
+						</figcaption>
+					</figure>
+					todo: custom image here, audience won't care about sparql
+				</section>
+				<section>
+					<h4>
+						OpenStreetMap as Linked Data Fragments
+					</h4>
+						<img src="./img/tile.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+				</section>
+				<section>
+					<h4>
+						Advantages of routable tiles
+					</h4>
+					<ul>
+						<li>
+							Potential live updates
+						</li>
+						<li>
+							Easy data reuse
+						</li>
+						<li>
+							Split up data management from route planning
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h4>
+						Can we do serverless route planning?
+					</h4>
+					<p> 
+						<strong>Slow</strong> but sure
+					</p>
+					<p class="fragment fade-in"> 
+						We need to reduce the data requirements <br>
+						See also: <a href="https://timkadlec.com/remembers/2019-01-09-the-ethics-of-performance/">
+							The ethics of performance
+						</a>
+					</p>
+				</section>
+				<section>
+					<h4>
+						Moving the load
+					</h4>
+					<img src="./img/preprocess spectrum.svg" style="height: 400px; border: none; box-shadow: none;"/>
+				</section>
+				<section>
+					<h4>
+						Pedestrian Areas
+					</h4>
+					<img src="./img/pedestrian.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+				</section>
+				<section>
+					<h4>
+						We are not the first
+					</h4>
+					<img src="./img/otp.jpg" style="border: none; box-shadow: none;"/>
+					<p style="text-align:left; font-size: 0.4em; padding: 0em 1.8em">
+						Source: <a href="https://opentripplanner.readthedocs.io/en/latest/Configuration/">Configuring OpenTripPlanner</a>
+					</p>
+				</section>
+				<section>
+					<h4>
+						Transit Tiles
+					</h4>
+					<img src="./img/single_reduction.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+				</section>
+				<section>
+					<h4>
+						Taking it up a level
+					</h4>
+					<div class="container">
+						<div class="col">
+							<img src="./img/transit_11.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+						</div>
+						<div class="col">
+							<img src="./img/transit_10.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h4>
+						Contracting unimportant nodes
+					</h4>
+					<div class="container">
+						<div class="col">
+							<img src="./img/intersection_10_reference.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+						</div>
+						<div class="col">
+							<img src="./img/intersection_10.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h4>
+						Processing pipeline
+					</h4>
+					<img src="./img/pipeline.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+				</section>
+				<section>
+					<h4>
+						Which regions are being reduced
+					</h4>
+					<div class="container">
+						<div class="col">
+							<img src="./img/relative_transit_13.svg" style="border: none; box-shadow: none;"/>
+						</div>
+						<div class="col">
+							<img src="./img/relative_contraction_13.svg" style="border: none; box-shadow: none;"/>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h4>
+						Queries
+					</h4>
+						TODO <br>
+						Less time, less data
+				</section>
+				<section>
+					Demo
+				</section>
+				<section>
+					<h4>
+						Routing data Ecosystem
+					</h4>
+					<p>
+						What's stopping us?
+					</p>
+					<p class="fragment fade-in">
+						Cost? <br>
+						Trust?
+					</p>
+				</section>
+				<section data-background-image="img/transit_11.svg" data-background-size="150%" data-background-opacity="0.1">
+					<h4>
+						Conclusion
+					</h4>
+					<p>
+						Serverless route planning can work
+					</p>
+					<p>
+						We should share more data
+					</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				transition: 'none',
+				slideNumber: true,
+				controls: false,
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
