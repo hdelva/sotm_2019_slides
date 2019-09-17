@@ -152,7 +152,8 @@
 					<h4>
 						Pedestrian Areas
 					</h4>
-					<img src="./img/pedestrian.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+					<img src="./img/raw_pedestrian.svg" style="max-height: 300px; border: none; box-shadow: none;"/>
+					<img src="./img/pedestrian.svg" style="max-height: 300px; border: none; box-shadow: none;"/>
 				</section>
 				<section>
 					<h4>
@@ -195,11 +196,8 @@
 						</div>
 					</div>
 				</section>
-				<section>
-					<h4>
-						Processing pipeline
-					</h4>
-					<img src="./img/pipeline.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+				<section data-background-iframe="https://hdelva.be/slides/sotm2019/demo.html" data-background-interactive>			
+					
 				</section>
 				<section>
 					<h4>
@@ -218,11 +216,38 @@
 					<h4>
 						Queries
 					</h4>
-						TODO <br>
-						Less time, less data
+					<p>
+						Brussels Airport - Bruges
+						<br>
+						100 km through relatively dense urban areas
+					</p>
+					<table style="font-size: 0.8em">
+					  <thead>
+					    <tr>
+					      <th></th>
+					      <th style="text-align:right">Time Needed</th>
+					      <th style="text-align:right">Downloaded Data</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td>Raw Data</td>
+					      <td style="text-align:right">3,393 s</td>
+					      <td style="text-align:right">214,672 kB</td>
+					    </tr>
+					    <tr>
+					      <td>Preprocessed Data</td>
+					      <td style="text-align:right">20 s</td>
+					      <td style="text-align:right">9,116 kB</td>
+					    </tr>
+					  </tbody>
+					</table>
 				</section>
 				<section>
-					Demo
+					<h4>
+						Processing pipeline
+					</h4>
+					<img src="./img/pipeline.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
 				</section>
 				<section>
 					<h4>
@@ -241,7 +266,7 @@
 						Conclusion
 					</h4>
 					<p>
-						Serverless route planning can work
+						Serverless route planning seems feasible
 					</p>
 					<p>
 						We should share more data
