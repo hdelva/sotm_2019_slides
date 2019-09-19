@@ -47,9 +47,23 @@
 			.col{
 			    flex: 1;
 			}
+		    #footer-left {
+		        position: absolute;
+		        bottom: 0%;
+		        left: 0%;
+		    }
 		</style>
 	</head>
 	<body>
+		<div id="hidden" style="display:none;">
+		    <div id="header">
+		        <div id="footer-left">
+		        	<img height="100" style="margin: 0em 0.5em" src="img/ugent.png"/>
+	        		<img style="margin: 0.5em 0em" src="img/opt-logo.svg"/>
+
+		        </div>
+		    </div>
+		</div>
 		<div class="reveal">
 			<div class="slides">
 				<section>
@@ -64,6 +78,26 @@
 						 <sup>1</sup> IDLab, Ghent University – imec <br>
 						 <sup>2</sup> Open Knowledge Belgium
 					</p>
+				</section>
+				<section>
+					<!--
+					<h4>
+						Something to think about
+					</h4>
+					-->
+					<p>
+						If most route planners preprocess the same data
+					</p>
+					<p>
+						Does it make sense to share the results?
+					</p>
+				</section>
+				<section>
+					<ul>
+						<strong><li>Linked Data</li></strong>
+						<li style="list-style-type: none;">Preprocessing Routable Tiles</li>
+						<li style="list-style-type: none;">Using the Preprocessed Data</li>
+					</ul>
 				</section>
 				<section>
 					<h4>
@@ -89,29 +123,26 @@
 				</section>
 				<section>
 					<h4>
+						OpenStreetMap as Linked Data Fragments
+					</h4>
+						<img src="./img/tile.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
+				</section>
+				<section>
+					<h4>
 						Share the load
 					</h4>
 					<figure>
 						<div class="container">
 							<div class="col">
-								<img src="./img/centralized.png" style="border: none; box-shadow: none;"/>
+								<img src="./img/centralized.svg" style="border: none; box-shadow: none;"/>
 							</div>
 							<div class="col">
-								<img src="./img/decentralized.png" style="border: none; box-shadow: none;"/>
+								<img src="./img/decentralized.svg" style="border: none; box-shadow: none;"/>
 							</div>
 						</div>
-						<figcaption style="text-align:left; font-size: 0.3em; padding: 0em 2.2em">
-							Verborgh, R., Vander Sande, M., Colpaert, P., Coppens, S., Mannens, E., & Van de Walle, R. (2014, April). Web-Scale Querying through Linked Data Fragments. In LDOW.
-						</figcaption>
 					</figure>
-					todo: custom image here, audience won't care about sparql
 				</section>
-				<section>
-					<h4>
-						OpenStreetMap as Linked Data Fragments
-					</h4>
-						<img src="./img/tile.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
-				</section>
+				<!--
 				<section>
 					<h4>
 						Advantages of routable tiles
@@ -128,6 +159,7 @@
 						</li>
 					</ul>
 				</section>
+				-->
 				<section>
 					<h4>
 						Can we do serverless route planning?
@@ -141,6 +173,13 @@
 							The ethics of performance
 						</a>
 					</p>
+				</section>
+				<section>
+					<ul>
+						<li style="list-style-type: none;">Linked Data</li>
+						<strong><li>Preprocessing Routable Tiles</li></strong>
+						<li style="list-style-type: none;">Using the Preprocessed Data</li>
+					</ul>
 				</section>
 				<section>
 					<h4>
@@ -168,11 +207,14 @@
 					<h4>
 						Transit Tiles
 					</h4>
+					<p>
+						Only retain data that's needed to traverse a tile
+					</p>
 					<img src="./img/single_reduction.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
 				</section>
 				<section>
 					<h4>
-						Higher zoom levels contain less data
+						Increased effect on higher levels
 					</h4>
 					<div style="font-size: 0.7em;">
 						<p style="margin: 0px;">
@@ -219,12 +261,20 @@
 						</div>
 					</div>
 				</section>
+				<section>
+					<ul>
+						<li style="list-style-type: none;">Linked Data</li>
+						<li style="list-style-type: none;">Preprocessing Routable Tiles</li></strong>
+						<strong><li>Using the Preprocessed Data</li></strong>
+					</ul>
+				</section>
+
 				<section data-background-iframe="https://hdelva.be/slides/sotm2019/demo.html" data-background-interactive>			
 					
 				</section>
 				<section>
 					<h4>
-						Which regions are being reduced
+						Urbanization determines effectiveness 
 					</h4>
 					<div class="container">
 						<div class="col">
@@ -237,7 +287,7 @@
 				</section>
 				<section>
 					<h4>
-						Significant Impact on Query Times
+						Impact on Query Times
 					</h4>
 					<p>
 						Brussels Airport - Bruges
@@ -248,8 +298,8 @@
 					  <thead>
 					    <tr>
 					      <th></th>
-					      <th style="text-align:right">Time Needed</th>
-					      <th style="text-align:right">Downloaded Data</th>
+					      <th style="text-align:right">Query Time</th>
+					      <th style="text-align:right">Data Downloaded</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -266,12 +316,14 @@
 					  </tbody>
 					</table>
 				</section>
+				<!--
 				<section>
 					<h4>
 						Processing pipeline
 					</h4>
 					<img src="./img/pipeline.svg" style="max-height: 400px; border: none; box-shadow: none;"/>
 				</section>
+				-->
 				<section>
 					<h4>
 						Routing data Ecosystem
@@ -328,6 +380,19 @@
 					}
 				},
 			});
+		</script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script type="text/javascript">
+		    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+		    var header = $('#header').html();
+		    if ( window.location.search.match( /print-pdf/gi ) ) {
+		        Reveal.addEventListener( 'ready', function( event ) {
+		            $('.slide-background').append(header);
+		        });
+		    }
+		    else {
+		        $('div.reveal').append(header);
+		   }
 		</script>
 	</body>
 </html>
